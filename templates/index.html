@@ -1,0 +1,75 @@
+{% extends 'layout.html' %}
+
+{% block title %}Productos{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">Inventario</h2>
+
+<a href="/agregar" class="btn btn-custom mb-3">Agregar Producto</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Cantidad</th>
+            <th>Vencimiento</th>
+            <th>Acciones</th> <!-- 👈 IMPORTANTE -->
+        </tr>
+    </thead>
+
+    <tbody>
+
+    {% if productos %}
+        {% for p in productos %}
+        <tr>
+            <td>{{ p.id }}</td>
+            <td>{{ p.nombre }}</td>
+            <td>
+    {% if p.cantidad == 0 %}
+        <span class="badge bg-danger" style="background:#b91c1c !important;">⚠ 
+            Sin stock
+        </span>
+
+    {% elif p.cantidad < 10 %}
+        <span class="badge bg-danger">🔴
+            {{ p.cantidad }}
+        </span>
+
+    {% elif p.cantidad < 30 %}
+        <span class="badge bg-warning text-dark">🟡
+            {{ p.cantidad }}
+        </span>
+
+    {% elif p.cantidad > 50 %}
+        <span class="badge bg-success">🟢
+            {{ p.cantidad }}
+        </span>
+
+    {% else %}
+        <span class="badge bg-success">🟢
+            {{ p.cantidad }}
+        </span>
+    {% endif %}
+</td>
+<td>{{ p.fecha_vencimiento }}</td>
+            <td>
+                <a href="/editar/{{ p.id }}" class="btn btn-warning btn-sm">Editar</a>
+                <a href="/eliminar/{{ p.id }}" class="btn btn-danger btn-sm"
+                   onclick="return confirm('¿Eliminar producto?')">
+                   Eliminar
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td colspan="4">No hay productos registrados</td>
+        </tr>
+    {% endif %}
+
+    </tbody>
+</table>
+
+{% endblock %}

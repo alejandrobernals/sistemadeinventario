@@ -1,0 +1,86 @@
+{% extends 'layout.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">Dashboard</h2>
+
+{% if por_vencer %}
+<div class="alert alert-warning">
+    <strong>⏳ Atención:</strong> Productos próximos a vencer
+
+    <ul class="mb-0 mt-2">
+        {% for p in por_vencer %}
+            <li>
+                {{ p.nombre }} - vence: {{ p.fecha_vencimiento }}
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+{% if alertas_stock %}
+<div class="alert alert-danger">
+    <strong>⚠ Alerta:</strong> Productos con bajo stock
+
+    <ul class="mb-0 mt-2">
+        {% for p in alertas_stock %}
+            <li>{{ p.nombre }} ({{ p.cantidad }})</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+<div class="row g-4">
+
+
+     <!-- MAS VENDIDOS -->
+    <div class="col-md-3">
+        <div class="card p-3">
+            <h5>Más vendidos</h5>
+
+            {% if mas_vendidos %}
+                <ul class="list-group mt-2">
+                    {% for p in mas_vendidos %}
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>#{{ loop.index }} {{ p.nombre }}</span>
+                        <span class="badge bg-primary">{{ p.total }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="mt-2">Sin datos</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- VENTAS HOY -->
+    <div class="col-md-3">
+        <div class="card p-3">
+            <h5>Ventas de hoy</h5>
+
+            {% if ventas_hoy %}
+                <ul class="list-group mt-2">
+                    {% for v in ventas_hoy %}
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>{{ v.nombre }}</span>
+                        <span class="badge bg-success">{{ v.cantidad }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="mt-2">Sin ventas hoy</p>
+            {% endif %}
+        </div>
+    </div>
+
+
+</div>
+
+</div>
+
+</body>
+</html>
+
+{% endblock %}

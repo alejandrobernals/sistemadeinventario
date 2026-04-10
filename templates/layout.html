@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Sistema{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+
+    .alert-danger {
+    background: #7f1d1d;
+    border: none;
+    color: white;
+    animation: parpadeo 1s infinite alternate;
+}
+
+@keyframes parpadeo {
+    from { opacity: 1; }
+    to { opacity: 0.7; }
+}
+        body {
+            background: #0f172a;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 220px;
+            background: #020617;
+            padding-top: 20px;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.5);
+        }
+
+        .sidebar h4 {
+            text-align: center;
+            color: #60a5fa;
+            margin-bottom: 30px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            background: #1e293b;
+            padding-left: 25px;
+        }
+
+        /* CONTENIDO */
+        .content {
+            margin-left: 240px;
+            padding: 20px;
+        }
+
+        .card {
+            background: linear-gradient(145deg, #111827, #020617);
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 25px rgba(59,130,246,0.4);
+        }
+
+        .card h5 {
+            color: #60a5fa;
+            font-weight: bold;
+        }
+
+        .btn-custom {
+            background: #2563eb;
+            border: none;
+        }
+
+        .btn-custom:hover {
+            background: #1d4ed8;
+        }
+
+        table {
+            background: #020617;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th {
+            background: #1e293b;
+            color: #60a5fa;
+            text-align: center;
+        }
+
+        td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        tr:hover {
+            background: rgba(59,130,246,0.1);
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h4>EMPRESA</h4>
+
+    <a href="/">🏠 Dashboard</a>
+    <a href="/productos">📦 Productos</a>
+    <a href="/ventas">💰 Ventas</a>
+</div>
+
+<!-- CONTENIDO DINÁMICO -->
+<div class="content">
+    {% block content %}
+    {% endblock %}
+</div>
+
+</body>
+</html>

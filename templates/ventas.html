@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+{% block title %}Ventas{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">Historial de Ventas</h2>
+
+<a href="/nueva_venta" class="btn btn-custom mb-3">Nueva Venta</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Fecha</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    {% for v in ventas %}
+    <tr>
+        <td>{{ v.id }}</td>
+        <td>{{ v.nombre }}</td>
+        <td>{{ v.cantidad }}</td>
+        <td>{{ v.fecha }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
